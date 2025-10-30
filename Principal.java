@@ -1,26 +1,26 @@
-package aula6;
+package exemplo;
 
-public class Principal {
-	
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Principal implements CommandLineRunner {	
+	@Autowired
+	PessoaRepository pessoaRepository;
 	public static void main(String[] args) {
-	
-		Aluno a1 = new Aluno();
-		a1.setNome("José da Silva"); 
-		a1.setRa("12345");
-	
-		Endereco e1 = new Endereco();
-		e1.setCep("7100180");
-		e1.setLogradouro("Quadra 05");
-		e1.setNumero(3);
-
-		a1.setEndereco(e1);
-	
-		System.out.println(a1.getNome() +
-			           	" - " +
-			           a1.getRa() +
-			           " - " +
-			           a1.getEndereco().getLogradouro());
-		
+		SpringApplication.run(Principal.class, args);
 	}
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		Pessoa p = new Pessoa();
+		p.setNome("Adalberto nobrega");
+		p.setIdade(18);
+		
+		pessoaRepository.save(p);
+	}
+
 
 }
